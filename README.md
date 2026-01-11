@@ -1,5 +1,7 @@
 # AI Agent Testing Examples
 
+[![AI Agent Tests](https://github.com/ksankaran/ai-agent-testing/actions/workflows/test.yml/badge.svg)](https://github.com/ksankaran/ai-agent-testing/actions/workflows/test.yml)
+
 A collection of pytest examples demonstrating testing patterns for AI agents and LLM-powered systems.
 
 ## What's Included
@@ -80,6 +82,15 @@ tests/
 ├── test_ab_testing.py       # A/B testing framework tests
 └── test_live.py             # Live tests with real OpenAI calls
 ```
+
+## CI/CD
+
+This repo includes a GitHub Actions workflow that:
+
+1. **Unit & Mock Tests** — Runs on every push/PR (fast, free, no API key needed)
+2. **Live LLM Tests** — Runs on push to main if `OPENAI_API_KEY` secret is configured
+
+To enable live tests in CI, add your OpenAI API key as a repository secret named `OPENAI_API_KEY`.
 
 ## License
 
