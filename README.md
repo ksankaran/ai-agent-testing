@@ -8,6 +8,7 @@ A collection of pytest examples demonstrating testing patterns for AI agents and
 - **Integration Tests** — Tool selection, multi-step workflows, error handling
 - **Evaluation Tests** — LLM-as-judge patterns, metrics collection
 - **A/B Testing** — Traffic splitting, statistical significance testing
+- **Live Tests** — Real OpenAI API calls (optional, requires API key)
 
 ## Setup
 
@@ -49,15 +50,35 @@ pip install pytest-cov
 pytest tests/ --cov=tests --cov-report=html
 ```
 
+## Running Live Tests (Real LLM Calls)
+
+Live tests make actual API calls to OpenAI. They're skipped by default.
+
+1. Set your API key:
+```bash
+export OPENAI_API_KEY=sk-your-key-here
+```
+
+2. Run live tests:
+```bash
+pytest tests/test_live.py -v
+```
+
+Or run all tests including live:
+```bash
+pytest tests/ -v
+```
+
 ## Test Structure
 
 ```
 tests/
-├── conftest.py              # Shared fixtures
+├── conftest.py              # Shared fixtures and pytest config
 ├── test_unit_components.py  # Unit tests for agent components
 ├── test_integration.py      # Integration tests for workflows
 ├── test_evaluation.py       # LLM-as-judge evaluation tests
-└── test_ab_testing.py       # A/B testing framework tests
+├── test_ab_testing.py       # A/B testing framework tests
+└── test_live.py             # Live tests with real OpenAI calls
 ```
 
 ## License

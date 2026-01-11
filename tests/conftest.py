@@ -188,3 +188,19 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "unit: marks tests as unit tests"
     )
+    config.addinivalue_line(
+        "markers", "live: marks tests that make real LLM API calls (requires OPENAI_API_KEY)"
+    )
+
+
+def pytest_collection_modifyitems(config, items):
+    """Skip live tests if OPENAI_API_KEY is not set."""
+    import os
+
+    if os.environ.get("OPENAI_API_KEY"):
+        return  # API key is set, run all tests
+
+    skip_live = pytest.mark.skip(reason="OPENAI_API_KEY not set")
+    for item in items:
+        if "live" in item.keywords:
+            item.add_marker(skip_live)
